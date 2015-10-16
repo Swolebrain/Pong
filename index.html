@@ -22,6 +22,9 @@
 /**
  * Constants
  */
+
+    
+    
 var WIDTH  = 700;
 var HEIGHT = 600;
 var pi = Math.PI;
@@ -95,16 +98,6 @@ var ball = {
 	update: function() {
 		this.x += this.vel.x;
 		this.y += this.vel.y;
-		// check if out of the canvas in the y direction
-		/*if (0 > this.y || this.y+this.side > HEIGHT) {
-			// calculate and add the right offset, i.e. how far
-			// inside of the canvas the ball is
-			var offset = this.vel.y < 0 ? 0 - this.y : HEIGHT - 
-                (this.y+this.side);
-			this.y += 2*offset;
-			// mirror the y velocity
-			this.vel.y *= -1;
-		} */
         if (this.y < 0 || this.y > HEIGHT - this.side){
             this.vel.y *= -1;
         }
@@ -118,10 +111,11 @@ var ball = {
                 this.y > player.y){
                 //in here, it bounced against the player
                 this.vel.x *= -1;
+                this.vel.x += player.vel.x;
                 this.vel.y += player.vel.y;
             }
         }
-        if (this.x < this.side/2 && this.vel.x < 0){
+        if (this.x < 0 && this.vel.x < 0){
             gameRunning = false;
         }
         
